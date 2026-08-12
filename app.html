@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>💌</title>
+
+<style>
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/*
+    Scene hiện tại
+*/
+#app{
+    width:100%;
+    min-height:100vh;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     NHẠC DUY NHẤT CỦA TOÀN BỘ WEB
+===================================================== -->
+
+<audio
+    id="bgMusic"
+    loop
+    preload="auto"
+>
+    <source
+        src="music.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<!-- =====================================================
+     NƠI CHỨA 3 WEB
+===================================================== -->
+
+<div id="app"></div>
+
+
+<script>
+
+/* =====================================================
+   MUSIC ENGINE
+===================================================== */
+
+const music =
+    document.getElementById("bgMusic");
+
+music.volume = 0.35;
+
+
+/* =====================================================
+   LOAD SCENE
+===================================================== */
+
+async function loadScene(file){
+
+    const app =
+        document.getElementById("app");
+
+    /*
+       Xóa scene cũ
+    */
+    app.innerHTML = "";
+
+
+    /*
+       Đọc file HTML
+    */
+    const response =
+        await fetch(file);
+
+    if(!response.ok){
+        throw new Error(
+            "Không thể load " + file
+        );
+    }
+
+    const html =
+        await response.text();
+
+
+    /*
+       Parse HTML
+    */
+    const parser =
+        new DOMParser();
+
+    const doc =
+        parser.parseFromString(
+            html,
+            "text/html"
+        );
+
+
+    /*
+       Lấy CSS trong file
+    */
+
+    const styles =
+        [...doc.querySelectorAll("style")];
+
+    styles.forEach(style => {
+
+        const newStyle =
+            document.createElement("style");
+
+        newStyle.textContent =
+            style.textContent;
+
+        app.appendChild(
+            newStyle
+        );
+
+    });
+
+
+    /*
+       Lấy nội dung BODY
+    */
+
+    const body =
+        doc.body;
+
+    /*
+       Bỏ audio cũ của index
+       vì app.html đã có audio duy nhất
+    */
+
+    const oldMusic =
+        body.querySelector("#bgMusic");
+
+    if(oldMusic){
+        oldMusic.remove();
+    }
+
+
+    /*
+       Đưa HTML vào app
+    */
+
+    const content =
+        document.createElement("div");
+
+    content.innerHTML =
+        body.innerHTML;
+
+    app.appendChild(
+        content
+    );
+
+
+    /*
+       Chạy lại toàn bộ script
+       của file được load
+    */
+
+    const scripts =
+        [...body.querySelectorAll("script")];
+
+    for(const oldScript of scripts){
+
+        const newScript =
+            document.createElement("script");
+
+        /*
+           Script inline
+        */
+
+        if(oldScript.textContent){
+
+            newScript.textContent =
+                oldScript.textContent;
+
+        }
+
+        /*
+           Script có src
+        */
+
+        if(oldScript.src){
+
+            newScript.src =
+                oldScript.src;
+
+        }
+
+        app.appendChild(
+            newScript
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHUYỂN SCENE
+===================================================== */
+
+window.App = {
+
+    goToIndex(){
+
+        loadScene(
+            "index.html"
+        );
+
+    },
+
+    goToPuzzle(){
+
+        loadScene(
+            "puzzle.html"
+        );
+
+    },
+
+    goToEnding(){
+
+        loadScene(
+            "ending.html"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   KHỞI ĐỘNG
+===================================================== */
+
+loadScene(
+    "index.html"
+);
+
+</script>
+
+</body>
+</html>

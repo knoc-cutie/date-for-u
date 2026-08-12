@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>🌷 Một điều nhỏ dành cho cậu</title>
+
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    background: #fff4fa;
+}
+
+
+body {
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   ENDING
+===================================================== */
+
+#ending {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #fff4fa;
+}
+
+
+/* =====================================================
+   ẢNH COUPLE
+===================================================== */
+
+#photo {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    transform: scale(1);
+
+    filter: blur(0px);
+
+    transition:
+        opacity 1.5s ease,
+        filter 3s ease,
+        transform 3s ease;
+}
+
+
+#photo.show {
+
+    opacity: 1;
+
+    filter: blur(0px);
+
+    transform: scale(1);
+}
+
+
+/*
+   ẢNH RÕ → SAU ĐÓ MỜ
+*/
+
+#photo.blur {
+
+    opacity: 0.45;
+
+    filter: blur(8px);
+
+    transform: scale(1.03);
+}
+
+
+#photo img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+#photo::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(
+            255,
+            220,
+            238,
+            0.10
+        );
+}
+
+
+/* =====================================================
+   CHỮ ĐẦU
+===================================================== */
+
+#story {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+
+    pointer-events: none;
+}
+
+
+#story.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+#story p {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            54px
+        );
+
+    line-height: 1.65;
+
+    color: #ff5fa2;
+
+    text-shadow:
+        0 4px 25px
+        rgba(
+            255,
+            95,
+            162,
+            0.30
+        );
+}
+
+
+/* =====================================================
+   KHU VỰC MÈO
+===================================================== */
+
+#cats {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 50;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+
+#cats.show {
+    opacity: 1;
+}
+
+
+/* =====================================================
+   VÀI CON MÈO BAN ĐẦU
+===================================================== */
+
+.lonely-cat {
+
+    position: absolute;
+
+    opacity: 0;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    animation:
+        lonelyWalk
+        5s
+        linear
+        forwards;
+}
+
+
+@keyframes lonelyWalk {
+
+    0% {
+
+        opacity: 0;
+
+        left: -200px;
+
+        transform:
+            translateY(0)
+            scaleX(1);
+    }
+
+
+    10% {
+        opacity: 1;
+    }
+
+
+    90% {
+        opacity: 1;
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        left: 110vw;
+
+        transform:
+            translateY(5px)
+            scaleX(1);
+    }
+}
+
+
+/* =====================================================
+   MÈO SIÊU TO
+===================================================== */
+
+.walking-cat {
+
+    position: absolute;
+
+    /*
+       Gần bằng cả màn hình
+    */
+
+    width: 90vh !important;
+    height: 90vh !important;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: 0;
+
+    z-index: 70;
+
+    will-change:
+        left,
+        right,
+        transform,
+        opacity;
+}
+
+
+/* =====================================================
+   TRÁI → PHẢI
+===================================================== */
+
+.walk-left {
+
+    left: -100vh;
+
+    animation-name:
+        walkLeftToRight;
+
+    animation-timing-function:
+        linear;
+
+    animation-fill-mode:
+        forwards;
+}
+
+
+/* =====================================================
+   PHẢI → TRÁI
+===================================================== */
+
+.walk-right {
+
+    right: -100vh;
+
+    animation-name:
+        walkRightToLeft;
+
+    animation-timing-function:
+        linear;
+
+    animation-fill-mode:
+        forwards;
+}
+
+
+/* =====================================================
+   MÈO TRÁI → PHẢI
+===================================================== */
+
+@keyframes walkLeftToRight {
+
+    0% {
+
+        opacity: 0;
+
+        left: -100vh;
+
+        transform:
+            scaleX(1);
+    }
+
+
+    5% {
+        opacity: 1;
+    }
+
+
+    95% {
+        opacity: 1;
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        left: 110vw;
+
+        transform:
+            scaleX(1);
+    }
+}
+
+
+/* =====================================================
+   MÈO PHẢI → TRÁI
+===================================================== */
+
+@keyframes walkRightToLeft {
+
+    0% {
+
+        opacity: 0;
+
+        right: -100vh;
+
+        transform:
+            scaleX(-1);
+    }
+
+
+    5% {
+        opacity: 1;
+    }
+
+
+    95% {
+        opacity: 1;
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        right: 110vw;
+
+        transform:
+            scaleX(-1);
+    }
+}
+
+
+/* =====================================================
+   ENDING CUỐI
+===================================================== */
+
+#final {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        rgba(
+            255,
+            244,
+            250,
+            0.97
+        );
+
+    opacity: 0;
+
+    transform:
+        scale(0.94);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+
+    pointer-events: none;
+}
+
+
+#final.show {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* =====================================================
+   HẾT WEB
+===================================================== */
+
+#final h1 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            72px
+        );
+
+    font-weight: 600;
+
+    color: #ff5fa2;
+
+    margin-bottom: 15px;
+
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   DÒNG CUỐI
+===================================================== */
+
+#final p {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            22px,
+            3vw,
+            34px
+        );
+
+    font-weight: 400;
+
+    color: #ff5fa2;
+
+    line-height: 1.7;
+
+    margin: 2px 0;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote {
+
+    max-width: 950px;
+
+    margin-top: 35px;
+
+    padding:
+        0 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            18px,
+            2.3vw,
+            27px
+        );
+
+    line-height: 1.8;
+
+    color: #ff82b5;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    #story p {
+
+        font-size: 25px;
+
+        line-height: 1.6;
+    }
+
+
+    #final {
+
+        padding: 20px;
+    }
+
+
+    #final h1 {
+
+        font-size: 40px;
+    }
+
+
+    #final p {
+
+        font-size: 21px;
+    }
+
+
+    .quote {
+
+        font-size: 18px;
+
+        margin-top: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="ending">
+
+
+    <!-- =================================================
+         ẢNH COUPLE
+    ================================================== -->
+
+    <div id="photo">
+
+        <img
+            src="couple.JPG"
+            alt=""
+        >
+
+    </div>
+
+
+    <!-- =================================================
+         CHỮ ĐẦU
+    ================================================== -->
+
+    <div id="story">
+
+        <p>
+            “Phần tiếp theo của câu chuyện này<br>
+            mình muốn viết cùng cậu.”
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         MÈO
+    ================================================== -->
+
+    <div id="cats"></div>
+
+
+    <!-- =================================================
+         ENDING CUỐI
+    ================================================== -->
+
+    <div id="final">
+
+        <h1>
+            🎀 Hết web rồi.
+        </h1>
+
+
+        <p>
+            Nhưng date thì chưa đâu nha.
+        </p>
+
+
+        <p>
+            <b>
+                Hẹn cậu ngoài đời. ❤️
+            </b>
+        </p>
+
+
+        <div class="quote">
+
+            “Mong lần tới chúng ta không cần đến<br>
+            một cái web để rủ nhau đi date nữa.” 🌷
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   FILE GIF
+===================================================== */
+
+const CAT_GIF =
+    "cats-transparent.gif";
+
+
+/* =====================================================
+   KHI TRANG LOAD
+===================================================== */
+
+startEnding();
+
+
+/* =====================================================
+   START ENDING
+===================================================== */
+
+function startEnding() {
+
+    const photo =
+        document.getElementById(
+            "photo"
+        );
+
+
+    const story =
+        document.getElementById(
+            "story"
+        );
+
+
+    /*
+       1. ẢNH HIỆN RÕ
+    */
+
+    setTimeout(() => {
+
+        photo.classList.add(
+            "show"
+        );
+
+    }, 300);
+
+
+    /*
+       2. ẢNH GIỮ RÕ
+       rồi bắt đầu mờ
+    */
+
+    setTimeout(() => {
+
+        photo.classList.add(
+            "blur"
+        );
+
+    }, 3800);
+
+
+    /*
+       3. CHỮ HIỆN
+    */
+
+    setTimeout(() => {
+
+        story.classList.add(
+            "show"
+        );
+
+
+        startLonelyCats();
+
+    }, 5200);
+
+
+    /*
+       4. CHỮ BIẾN MẤT
+       đàn mèo khổng lồ bắt đầu
+    */
+
+    setTimeout(() => {
+
+        story.classList.remove(
+            "show"
+        );
+
+
+        const cats =
+            document.getElementById(
+                "cats"
+            );
+
+
+        cats.classList.add(
+            "show"
+        );
+
+
+        startCatSwarm();
+
+    }, 8200);
+
+}
+
+
+/* =====================================================
+   VÀI CON MÈO BAN ĐẦU
+===================================================== */
+
+function startLonelyCats() {
+
+    const container =
+        document.getElementById(
+            "cats"
+        );
+
+
+    for (
+        let i = 0;
+        i < 3;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            const cat =
+                document.createElement(
+                    "img"
+                );
+
+
+            cat.src =
+                CAT_GIF;
+
+
+            cat.className =
+                "lonely-cat";
+
+
+            /*
+               Mèo đầu tiên cũng to
+            */
+
+            const size =
+                150 +
+                Math.random() * 40;
+
+
+            cat.style.width =
+                size + "px";
+
+
+            cat.style.height =
+                size + "px";
+
+
+            cat.style.top =
+                (
+                    15 +
+                    Math.random() * 70
+                ) + "vh";
+
+
+            cat.style.animationDuration =
+                (
+                    4.5 +
+                    Math.random()
+                ) + "s";
+
+
+            container.appendChild(
+                cat
+            );
+
+
+            setTimeout(() => {
+
+                cat.remove();
+
+            }, 6000);
+
+
+        }, i * 600);
+
+    }
+
+}
+
+
+/* =====================================================
+   ĐÀN MÈO SIÊU TO
+===================================================== */
+
+function startCatSwarm() {
+
+    const container =
+        document.getElementById(
+            "cats"
+        );
+
+
+    container.innerHTML = "";
+
+    container.style.opacity =
+        "1";
+
+
+    /*
+       Số mèo khổng lồ.
+
+       Mỗi con gần bằng
+       cả màn hình.
+    */
+
+    const totalCats = 14;
+
+
+    /*
+       Tạo mèo nối tiếp nhau.
+
+       550ms/con
+       => con sau xuất hiện
+       trước khi con trước
+       đi khỏi hoàn toàn.
+    */
+
+    for (
+        let i = 0;
+        i < totalCats;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            createHugeCat(
+                container,
+                i
+            );
+
+        }, i * 550);
+
+    }
+
+
+    /*
+       Mèo cuối đi xong
+       thì hiện ending.
+
+       Không có khoảng chờ
+       dư.
+    */
+
+    const lastCatStart =
+        (totalCats - 1) * 550;
+
+
+    const catDuration =
+        5000;
+
+
+    setTimeout(() => {
+
+        container.style.opacity =
+            "0";
+
+
+        /*
+           Hiện ending gần như
+           ngay lập tức.
+        */
+
+        showFinal();
+
+
+    }, lastCatStart + catDuration);
+
+}
+
+
+/* =====================================================
+   TẠO MÈO KHỔNG LỒ
+===================================================== */
+
+function createHugeCat(
+    container,
+    index
+) {
+
+    const cat =
+        document.createElement(
+            "img"
+        );
+
+
+    cat.src =
+        CAT_GIF;
+
+
+    cat.className =
+        "walking-cat";
+
+
+    /*
+       80–100vh.
+
+       Tức là mèo gần bằng
+       toàn bộ chiều cao màn hình.
+    */
+
+    const size =
+        85 +
+        Math.random() * 10;
+
+
+    cat.style.width =
+        size + "vh";
+
+
+    cat.style.height =
+        size + "vh";
+
+
+    /*
+       Mỗi con lệch nhẹ
+       theo chiều dọc.
+    */
+
+    cat.style.top =
+        (
+            Math.random() * 8 -
+            4
+        ) + "vh";
+
+
+    /*
+       Xen kẽ hướng.
+
+       Con 1:
+       trái → phải
+
+       Con 2:
+       phải → trái
+
+       Con 3:
+       trái → phải
+    */
+
+    if (
+        index % 2 === 0
+    ) {
+
+        cat.classList.add(
+            "walk-left"
+        );
+
+    }
+
+    else {
+
+        cat.classList.add(
+            "walk-right"
+        );
+
+    }
+
+
+    /*
+       Thời gian chạy.
+    */
+
+    cat.style.animationDuration =
+        "5s";
+
+
+    container.appendChild(
+        cat
+    );
+
+
+    /*
+       Tự xóa sau khi đi qua.
+    */
+
+    setTimeout(() => {
+
+        cat.remove();
+
+    }, 5400);
+
+}
+
+
+/* =====================================================
+   HIỆN ENDING CUỐI
+===================================================== */
+
+function showFinal() {
+
+    const cats =
+        document.getElementById(
+            "cats"
+        );
+
+
+    /*
+       Tắt mèo ngay.
+    */
+
+    cats.style.opacity =
+        "0";
+
+
+    /*
+       Hiện chữ ngay.
+    */
+
+    document
+        .getElementById(
+            "final"
+        )
+        .classList
+        .add("show");
+
+}
+
+</script>
+
+
+</body>
+
+</html>

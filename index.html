@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💌 Thư mời đặc biệt 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+.final-note{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding-top:20px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-style:italic;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    color:#8b6d76;
+}
+
+.tiny-note{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:18px;
+
+    animation:
+        tinyArrow
+        1.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes tinyArrow{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(6px);
+    }
+
+}
+
+.diary-item{
+
+    display:flex;
+
+    gap:22px;
+
+    padding:24px 0;
+
+    border-top:
+        1px solid
+        rgba(130,90,105,.18);
+
+    opacity:0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.diary-item.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.diary-number{
+
+    flex:none;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    color:#c57b95;
+
+    padding-top:4px;
+}
+
+.diary-content{
+    flex:1;
+}
+
+.diary-title{
+
+    font-size:21px;
+
+    font-style:italic;
+
+    color:#5c3c48;
+
+    margin-bottom:8px;
+}
+
+.diary-text{
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:#66535a;
+}
+
+#finalCat.cat-fade-out{
+
+    animation:
+        catFadeOut
+        .8s
+        ease
+        forwards;
+
+}
+
+@keyframes catFadeOut{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1.04);
+        filter:blur(6px);
+    }
+
+}
+
+#curtainLeft,
+#curtainRight {
+    position:absolute;
+    top:0;
+    width:50%;
+    height:100%;
+    background:#ff5fa2;
+    z-index:20;
+    transition:transform 1.5s cubic-bezier(.77,0,.18,1);
+}
+
+#curtainLeft {
+    left:0;
+}
+
+#curtainRight {
+    right:0;
+}
+
+#finale.curtain-open #curtainLeft {
+    transform:translateX(-100%);
+}
+
+#finale.curtain-open #curtainRight {
+    transform:translateX(100%);
+}
+
+/* =========================
+   FINAL DATE ENDING
+========================= */
+
+#formDoneBtn{
+    display:none;
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:5000;
+
+    background:#ff5fa2;
+    color:white;
+
+    border:2px solid rgba(255,255,255,.85);
+    border-radius:999px;
+
+    padding:14px 22px;
+
+    font-size:16px;
+    font-weight:700;
+
+    box-shadow:
+        0 8px 25px rgba(255,20,147,.35);
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#formDoneBtn:hover{
+    transform:scale(1.06);
+}
+
+#finale{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,255,255,.25),
+        rgba(255,182,211,.72));
+    backdrop-filter:blur(10px);
+}
+
+/* Mèo */
+
+/* =================================
+   MÈO FULL MÀN HÌNH
+================================= */
+
+/* ================================
+   MÈO FULL MÀN HÌNH
+================================ */
+
+#finalCat{
+    position:fixed !important;
+
+    left:0 !important;
+    top:0 !important;
+
+    width:100vw !important;
+    height:100vh !important;
+
+    max-width:none !important;
+    max-height:none !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    object-fit:cover;
+
+    opacity:0;
+
+    transform:scale(1.08);
+
+    transition:
+        opacity 1s ease,
+        transform 1.5s ease;
+
+    cursor:grab;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    touch-action:none;
+
+    z-index:2;
+}
+
+#finalCat.cat-in{
+    opacity:1;
+
+    transform:scale(1);
+}
+
+
+/* =================================
+   RÈM
+================================= */
+
+#curtainLeft,
+#curtainRight{
+
+    position:absolute;
+
+    top:0;
+
+    width:50%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c2185b,
+            #ff5fa2,
+            #d81b60
+        );
+
+    z-index:20;
+
+    transition:
+        transform 1.6s
+        cubic-bezier(.77,0,.18,1);
+}
+
+#curtainLeft{
+    left:0;
+}
+
+#curtainRight{
+    right:0;
+}
+
+
+/* Khi mở rèm */
+
+#finale.curtain-open #curtainLeft{
+    transform:translateX(-100%);
+}
+
+#finale.curtain-open #curtainRight{
+    transform:translateX(100%);
+}
+
+
+/* =========================
+   NÚT BÀN TAY
+========================= */
+
+#petHand{
+
+    position:fixed;
+
+    /* NGAY BỤNG MÈO */
+    left:43%;
+top:64%;
+
+    z-index:100;
+
+    width:auto;
+    height:auto;
+
+    border:none;
+    outline:none;
+    padding:0;
+
+    background:transparent;
+
+    font-size:62px;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    box-shadow:none;
+
+    transform:
+        translate(-50%,-50%);
+
+    animation:
+        handHint 1.2s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform .15s ease;
+}
+
+#petHand:hover{
+
+    background:transparent;
+    box-shadow:none;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.08);
+}
+#petHand:active{
+
+    background:transparent;
+    box-shadow:none;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.82);
+}
+
+@keyframes handHint{
+
+    0%,100%{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(10px);
+
+    }
+
+}
+
+/* =================================
+   HƯỚNG DẪN
+================================= */
+
+#petInstruction{
+
+    position:absolute;
+
+    z-index:25;
+
+    left:50%;
+    bottom:9%;
+
+    transform:translateX(-50%);
+
+    color:white;
+
+    font-size:24px;
+    font-weight:700;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 3px 12px
+        rgba(255,20,147,.8);
+
+    pointer-events:none;
+
+    animation:
+        instructionFloat
+        1.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes instructionFloat{
+
+    0%,100%{
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translateX(-50%)
+            translateY(-8px);
+    }
+}
+
+#petText{
+    position:absolute;
+    left:50%;
+    top:72%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    text-shadow:
+        0 3px 10px rgba(255,20,147,.7);
+    text-align:center;
+    white-space:nowrap;
+}
+
+#petProgress{
+
+    position:absolute;
+
+    z-index:25;
+
+    left:50%;
+    bottom:4%;
+
+    transform:translateX(-50%);
+
+    width:280px;
+    height:10px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.35);
+
+    overflow:hidden;
+
+    backdrop-filter:blur(5px);
+}
+
+#petProgressBar{
+    height:100%;
+    width:0%;
+    background:#ff5fa2;
+    transition:.15s;
+}
+
+/* =========================
+   NÚT CỤC CỨT
+========================= */
+
+#poop{
+    position:absolute;
+
+    /* vị trí cục cứt: gần đuôi mèo */
+    left:31%;
+    top:76%;
+
+    z-index:200;
+
+    border:none;
+    outline:none;
+    padding:0;
+
+    background:transparent;
+
+    font-size:90px;
+    line-height:1;
+
+    display:none;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transform:
+        translate(-50%,50%)
+        scale(.15);
+
+    box-shadow:none;
+
+    pointer-events:auto;
+z-index: 99999 !important;
+pointer-events: auto !important;
+cursor: pointer !important;
+position: fixed !important;
+}
+
+#poop:hover{
+
+    background:transparent;
+
+    transform:
+        translate(-50%,0)
+        scale(1.08);
+
+}
+
+
+/* lúc bấm */
+
+#poop:active{
+
+    background:transparent;
+
+    transform:
+        translate(-50%,0)
+        scale(.82);
+
+}
+
+
+/* =========================
+   CỨT LÒI RA
+========================= */
+
+#poop.poop-show{
+    display:block;
+
+    animation:
+        poopComeOut
+        .9s
+        cubic-bezier(.17,.89,.32,1.3)
+        forwards;
+}
+
+@keyframes poopComeOut{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translate(-50%,50%)
+            scale(.15);
+    }
+
+    45%{
+        opacity:1;
+
+        transform:
+            translate(-50%,-12%)
+            scale(1.15);
+    }
+
+    70%{
+        transform:
+            translate(-50%,4%)
+            scale(.95);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            translate(-50%,0)
+            scale(1);
+    }
+}
+
+#poop.poop-clicked{
+
+    animation:
+        poopClicked
+        .7s
+        ease-in-out
+        forwards;
+
+}
+
+
+@keyframes poopClicked{
+
+    0%{
+        transform:
+            translate(-50%,0)
+            scale(1)
+            rotate(0deg);
+    }
+
+    15%{
+        transform:
+            translate(-50%,0)
+            scale(1.15)
+            rotate(-8deg);
+    }
+
+    30%{
+        transform:
+            translate(-50%,0)
+            scale(1.1)
+            rotate(8deg);
+    }
+
+    45%{
+        transform:
+            translate(-50%,0)
+            scale(1.05)
+            rotate(-6deg);
+    }
+
+    60%{
+        transform:
+            translate(-50%,0)
+            scale(1)
+            rotate(5deg);
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,20px)
+            scale(.2)
+            rotate(0deg);
+    }
+
+}
+
+#poopText{
+    display:none;
+    position:absolute;
+    top:68%;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    text-shadow:0 3px 12px #ff1493;
+}
+
+/* Lời nhắn */
+
+#finalMessage{
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:min(680px,88vw);
+    max-height:78vh;
+
+    overflow-y:auto;
+
+    box-sizing:border-box;
+
+    padding:45px 50px;
+
+    /* nền giấy hồng trong suốt */
+    background:
+        rgba(255,247,248,.82);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.85);
+
+    border-radius:4px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(120,60,80,.22);
+
+    color:#49383f;
+
+    text-align:left;
+
+   font-family:
+    Arial,
+    "Segoe UI",
+    sans-serif;
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:9990;
+
+    /* thanh cuộn ẩn */
+    scrollbar-width:none;
+}
+
+#finalMessage::-webkit-scrollbar{
+    display:none;
+}
+
+.final-line{
+    opacity:0;
+    transform:translateY(15px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.final-line.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   CHUYỂN SANG LỜI NHẮN
+========================= */
+
+#finalMessage.message-show{
+
+    animation:
+        messageAppear
+        1.2s
+        ease forwards;
+
+}
+
+
+@keyframes messageAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translateY(30px)
+            scale(.96);
+
+        filter:blur(8px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
+
+    }
+
+}
+
+/* Hộp nhạc */
+
+#musicBox{
+    display:none;
+    position:absolute;
+    left:50%;
+    bottom:50px;
+    transform:translateX(-50%);
+    font-size:100px;
+    cursor:pointer;
+    animation:musicFloat 2s ease-in-out infinite;
+}
+
+@keyframes musicFloat{
+    0%,100%{
+        transform:translateX(-50%) translateY(0);
+    }
+    50%{
+        transform:translateX(-50%) translateY(-12px);
+    }
+}
+
+/* Puzzle */
+
+#puzzleScreen{
+    display:none;
+    position:absolute;
+    inset:0;
+    padding:25px;
+    overflow:auto;
+    text-align:center;
+}
+
+#puzzleBoard{
+    width:min(90vw,600px);
+    aspect-ratio:1;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:4px;
+    background:white;
+    padding:4px;
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(255,20,147,.3);
+}
+
+.puzzle-piece{
+    background-image:url("couple.jpg");
+    background-size:300% 300%;
+    cursor:pointer;
+    border-radius:5px;
+    transition:.2s;
+}
+
+.puzzle-piece.selected{
+    transform:scale(.94);
+    box-shadow:0 0 0 4px #ff5fa2;
+}
+
+#puzzleTitle{
+    color:white;
+    font-size:28px;
+    font-weight:700;
+    text-shadow:0 3px 12px #ff1493;
+}
+
+#puzzleHint{
+    color:white;
+    font-size:17px;
+}
+
+/* Ảnh cuối */
+
+#finalPhoto{
+    display:none;
+    position:absolute;
+    inset:0;
+    padding:30px;
+    text-align:center;
+    overflow:auto;
+}
+
+#finalPhoto img{
+    width:min(80vw,550px);
+    max-height:65vh;
+    object-fit:contain;
+    border-radius:25px;
+    opacity:0;
+    transform:scale(.9);
+    animation:photoFade 3s forwards;
+    box-shadow:
+        0 15px 50px rgba(255,20,147,.35);
+}
+
+@keyframes photoFade{
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+#finalQuote{
+    opacity:0;
+    animation:quoteFade 2s 2s forwards;
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    line-height:1.7;
+    text-shadow:0 3px 15px #ff1493;
+    margin-top:20px;
+}
+
+@keyframes quoteFade{
+    to{
+        opacity:1;
+    }
+}
+
+/* Mèo chạy quanh màn hình */
+
+.walking-cat{
+    position:fixed;
+    z-index:9500;
+    font-size:55px;
+    pointer-events:none;
+    animation:catWalk linear forwards;
+}
+
+@keyframes catWalk{
+    from{
+        transform:translateX(-100px);
+    }
+    to{
+        transform:translateX(calc(100vw + 100px));
+    }
+}
+
+/* Ending */
+
+#ultimateEnding{
+    display:none;
+    position:absolute;
+    inset:0;
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    color:white;
+    background:
+        radial-gradient(circle,
+        rgba(255,105,180,.65),
+        rgba(255,182,211,.92));
+}
+
+#ultimateEnding h1{
+    color:white;
+    font-size:clamp(30px,6vw,60px);
+    text-shadow:
+        0 3px 15px #ff1493,
+        0 0 30px rgba(255,255,255,.8);
+}
+
+#ultimateEnding p{
+    font-size:clamp(18px,3vw,28px);
+    line-height:1.8;
+    margin-top:20px;
+    text-shadow:0 3px 12px #ff1493;
+}
+    
+.message-list {
+    margin-top: 20px;
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+.message-line {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.heart-icon {
+    flex: 0 0 38px;
+    color: #ff4f9a;
+    font-size: 22px;
+    line-height: 1.9;
+}
+
+.message-line p {
+    flex: 1;
+    margin: 0;
+    color: white;
+    line-height: 1.9;
+    text-align: justify;
+}
+
+text-align: justify;
+text-justify: inter-word;
+
+.popup-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== GLASSMORPHISM POPUP ===== */
+
+.popup-glass {
+    background: rgba(255, 105, 180, 0.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 15px 50px rgba(255, 20, 147, 0.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    color: white;
+}
+
+/* Chữ bên trong popup */
+.popup-glass p {
+    color: white;
+}
+
+/* Tiêu đề popup */
+.popup-glass h2 {
+    color: #fff !important;
+    text-shadow: 0 2px 8px rgba(255, 20, 147, .5);
+}
+
+/* Ẩn thanh cuộn nhưng vẫn cho cuộn */
+.popup-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Dòng READY nổi bật */
+.ready-text {
+    text-align: center;
+    color: #fff !important;
+    font-size: 25px !important;
+    font-weight: 700;
+    margin: 25px 0 10px;
+    text-shadow:
+        0 0 8px rgba(255,255,255,.8),
+        0 0 18px rgba(255,105,180,.9);
+}
+
+#typing{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+max-height:320px;
+
+overflow-y:auto;
+
+padding-right:8px;
+
+scroll-behavior:smooth;
+
+}
+
+.message{
+
+background:white;
+
+padding:12px 18px;
+
+border-radius:20px 20px 20px 5px;
+
+margin:10px 0;
+
+width:fit-content;
+
+max-width:75%;
+
+text-align:left;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+animation:messagePop .4s ease;
+
+}
+
+@keyframes messagePop{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.btns{
+display:none;
+margin-top:35px;
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+.no{
+position:relative;
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+}
+
+button{
+outline:none;
+}
+
+button:focus{
+outline:none;
+box-shadow:none;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(
+135deg,
+#ffd6e7,
+#ffe8f3,
+#fff4fa
+);
+
+overflow:hidden;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+width:90%;
+max-width:850px;
+
+background:rgba(255,255,255,.55);
+
+backdrop-filter:blur(15px);
+
+padding:50px;
+
+border-radius:30px;
+
+text-align:center;
+
+box-shadow:0 15px 50px rgba(255,105,180,.15);
+
+z-index:10;
+}
+
+h1{
+color:#ff5fa2;
+margin-bottom:20px;
+font-size:40px;
+}
+
+#typing p{
+margin:12px 0;
+font-size:22px;
+color:#444;
+animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.btns{
+display:none;
+margin-top:35px;
+
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+button{
+padding:15px 28px;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-size:18px;
+transition:.25s;
+}
+
+.yes{
+background:#ff5fa2;
+color:white;
+}
+
+.yes:hover{
+transform:scale(1.08);
+}
+
+.no{
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+position:relative;
+}
+
+.music{
+margin-top:20px;
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+}
+
+iframe{
+display:none;
+width:100%;
+height:100vh;
+border:none;
+}
+
+.heart{
+position:fixed;
+top:-30px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-20px);
+}
+to{
+transform:translateY(110vh);
+}
+}
+
+.indie-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.indie-location{
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#a67887;
+
+    margin-bottom:12px;
+}
+
+.indie-line{
+    width:100%;
+
+    height:1px;
+
+    background:
+        rgba(150,100,115,.25);
+
+    margin-bottom:18px;
+}
+
+.indie-stamp{
+    font-size:32px;
+
+    opacity:.85;
+}
+
+.final-title{
+    text-align:center;
+
+     font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:36px;
+
+    font-weight:normal;
+
+    font-style:italic;
+
+    color:#5b3b47;
+
+    margin-bottom:6px;
+}
+
+.final-subtitle{
+    text-align:center;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:#a98691;
+
+    margin-bottom:35px;
+}
+
+#goPuzzleBtn{
+
+    display:none;
+
+    width:max-content;
+
+    margin:35px auto 5px;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        1px solid
+        rgba(255,105,180,.35);
+
+    color:#d85b89;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(255,105,180,.18);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+#goPuzzleBtn:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(255,105,180,.28);
+}
+
+#goPuzzleBtn span{
+    margin-left:7px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="welcome">
+
+<h1>💌 Thư mời đặc biệt 💌</h1>
+<div id="typing"></div>
+
+<div id="continueBox" style="display:none;margin-top:25px;">
+<button class="yes" onclick="showQuestionPage()">
+✨ Tiếp tục
+</button>
+</div>
+
+<div id="questionPage" style="display:none;">
+
+<h2 style="color:#ff5fa2;margin-top:20px;">
+Vậy nên...
+</h2>
+
+<p style="font-size:24px;margin:20px 0;">
+Cậu có muốn đi date với mình trong tuần này không? ☕💖
+</p>
+
+<div class="btns" id="realButtons">
+
+<button class="yes" onclick="openPopup()">
+💖 Dạ có
+</button>
+
+<button class="no" id="noBtn">
+🙃 Không
+</button>
+
+</div>
+
+</div>
+
+<button class="music" onclick="playMusic()">
+🎧 Nhạc nền nè
+</button>
+
+</div>
+
+<iframe
+id="formFrame"
+src="https://docs.google.com/forms/d/e/1FAIpQLSdItGGlkrepjd1lv4a9sq_frEPr-CWbvOgXcRV9hDt-dI8gQw/viewform?usp=header">
+</iframe>
+
+<button
+id="formDoneBtn"
+class="final-start-btn"
+onclick="startFinale()"
+>
+💌 Mình điền xong rồi
+</button>
+    
+
+<script>
+
+const lines = [
+
+"Hey Mquan 🌷",
+
+"Mình đã suy nghĩ khá lâu trước khi làm cái này đó!!!",
+
+"Thật ra mình có một câu hỏi nho nhỏ muốn hỏi cậu...",
+
+"Đừng lo, không phải về bài tập đâu???",
+
+"Cũng không phải về công việc hay những chuyện đau đầu khác~~~",
+
+"Lại càng không phải mấy câu hỏi triết lý về tương lai nữaaaa",
+
+"Chỉ là...",
+
+"Mình đang muốn dành thêm thời gian với cậu một chút...",
+
+"Muốn cùng cậu đi đâu đó, ăn gì đó ngon ngon, nghe vài bài nhạc hay hay và tạo thêm một kỷ niệm mớiiii",
+
+"Vậy nên...",
+
+
+
+];
+
+let i = 0;
+
+let fastMode = false;
+
+function showNextLine(){
+
+if(i < lines.length){
+
+const msg =
+document.createElement("div");
+
+msg.classList.add("message");
+
+msg.innerText =
+lines[i];
+
+document
+.getElementById("typing")
+.appendChild(msg);
+
+const typingBox =
+document.getElementById("typing");
+
+typingBox.scrollTop =
+typingBox.scrollHeight;
+
+i++;
+
+setTimeout(
+showNextLine,
+fastMode ? 150 : 1800
+);
+
+}else{
+
+document
+.getElementById("continueBox")
+.style.display="block";
+
+}
+}
+
+showNextLine();
+
+document.addEventListener("click", (event) => {
+
+    // Bấm nút nhạc thì CHỈ mở nhạc
+    if (event.target.closest(".music")) {
+        return;
+    }
+
+    // Click chỗ khác thì tăng tốc độ chữ
+    if (i < lines.length) {
+        fastMode = true;
+    }
+
+});
+
+const texts=[
+
+"Ơ kìa 🥺",
+
+"Bấm nhầm rồi đúng không 🌷",
+
+"Chọn lại nhaaaa 💖",
+
+"Không được đâu 😌",
+
+"Có mỗi một đáp án thôi á 😭",
+
+"Thử lại đi mà 💕",
+
+"Mình biết cậu sẽ chọn Có 😚"
+
+];
+
+let count=0;
+
+const noBtn =
+document.getElementById("noBtn");
+
+function escapeButton(){
+
+const current =
+parseInt(noBtn.dataset.pos || 0);
+
+const next =
+current === 0 ? 35 : 0;
+
+noBtn.style.transform =
+`translateX(${next}px)`;
+
+noBtn.dataset.pos = next;
+
+noBtn.innerText =
+texts[count % texts.length];
+
+count++;
+
+}
+
+noBtn.addEventListener(
+"click",
+escapeButton
+);
+
+function showQuestionPage(){
+
+document
+.getElementById("typing")
+.style.display="none";
+
+document
+.getElementById("continueBox")
+.style.display="none";
+
+document
+.getElementById("questionPage")
+.style.display="block";
+
+document
+.getElementById("realButtons")
+.style.display="flex";
+
+}
+
+function openPopup(){
+
+document
+.getElementById("popup")
+.style.display="flex";
+
+}
+function closePopup(){
+
+document
+.getElementById("popup")
+.style.display="none";
+
+}
+
+function openSecondPopup(){
+
+document
+.getElementById("popup")
+.style.display="none";
+
+document
+.getElementById("secondPopup")
+.style.display="flex";
+
+}
+
+function closeSecondPopup(){
+
+document
+.getElementById("secondPopup")
+.style.display="none";
+
+}
+
+function openForm(){
+
+document
+.getElementById("welcome")
+.style.display="none";
+
+document
+.getElementById("formFrame")
+.style.display="block";
+
+document
+.getElementById("formDoneBtn")
+.style.display="block";
+
+document.body.style.overflow="auto";
+
+}
+
+function openFormAndSwap(){
+
+openForm();
+
+const btn =
+document.getElementById("formBtn");
+
+btn.innerText =
+"☕ Quay lại";
+
+btn.className =
+"music";
+
+btn.onclick =
+closeSecondPopup;
+
+}
+
+function openFormAndSwap(){
+
+openForm();
+
+const btn =
+document.getElementById("formBtn");
+
+btn.innerText =
+"☕ Quay lại";
+
+btn.className =
+"music";
+
+btn.onclick =
+closeSecondPopup;
+
+}
+
+function playMusic(){
+
+    const music =
+        window.top.document.getElementById(
+            "bgMusic"
+        );
+
+    music.volume = 0.35;
+
+    music.play();
+
+}
+
+setInterval(()=>{
+
+const heart =
+document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="💖";
+
+heart.style.left =
+Math.random()*100+"vw";
+
+heart.style.fontSize =
+(15+Math.random()*25)+"px";
+
+heart.style.animationDuration =
+(4+Math.random()*4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+},300);
+
+/* =========================
+   FINAL DATE ENDING
+========================= */
+
+
+let puzzlePieces = [];
+let selectedPiece = null;
+
+
+/* =========================
+   BẮT ĐẦU ENDING
+========================= */
+
+function startFinale(){
+
+    document
+        .getElementById("formFrame")
+        .style.display = "none";
+
+    document
+        .getElementById("formDoneBtn")
+        .style.display = "none";
+
+
+    const finale =
+        document.getElementById("finale");
+
+    finale.style.display = "block";
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    /* RÈM ĐÓNG */
+
+    finale.classList.remove(
+        "curtain-open"
+    );
+
+
+    /* MỞ RÈM */
+
+    setTimeout(() => {
+
+        finale.classList.add(
+            "curtain-open"
+        );
+
+    },300);
+
+
+    /* MÈO HIỆN */
+
+    setTimeout(() => {
+
+        document
+            .getElementById("finalCat")
+            .classList.add("cat-in");
+
+    },700);
+
+
+    /* =========================
+       BÀN TAY + 10 LẦN CLICK
+    ========================= */
+
+    setTimeout(() => {
+
+        const petHandButton =
+            document.getElementById(
+                "petHand"
+            );
+
+        const petInstructionText =
+            document.getElementById(
+                "petInstruction"
+            );
+
+        const petBar =
+            document.getElementById(
+                "petProgressBar"
+            );
+
+
+        petHandButton.style.display =
+            "flex";
+
+
+        let petClicks = 0;
+
+        const PET_MAX = 10;
+
+
+        petHandButton.onclick =
+            function(){
+
+                petClicks++;
+
+
+                /* PROGRESS */
+
+                const progress =
+                    (petClicks / PET_MAX)
+                    * 100;
+
+                petBar.style.width =
+                    progress + "%";
+
+
+                /* HIỆU ỨNG NHẤN */
+
+                petHandButton.style.transform =
+                    "translate(-50%,-50%) scale(.82)";
+
+
+                setTimeout(() => {
+
+                    petHandButton.style.transform =
+                        "translate(-50%,-50%) scale(1)";
+
+                },150);
+
+
+                /* CHỮ */
+
+                if(petClicks < 4){
+
+                    petInstructionText.innerText =
+                        "Aaa... 🥺💗";
+
+                }
+
+                else if(petClicks < 7){
+
+                    petInstructionText.innerText =
+                        "Đúng rồi đó...🥺";
+
+                }
+
+                else if(petClicks < 10){
+
+                    petInstructionText.innerText =
+                        "Thêm chút nữa thôi... 💗";
+
+                }
+
+
+                /* =====================
+                   ĐỦ 10 LẦN
+                ===================== */
+
+                if(petClicks >= PET_MAX){
+
+                    petHandButton.disabled =
+                        true;
+
+
+                    petHandButton.style.display =
+                        "none";
+
+
+                    petInstructionText.innerText =
+                        "Ngoan lắm... 💗";
+
+
+                    setTimeout(() => {
+
+                        petInstructionText.style.display =
+                            "none";
+
+
+                        document
+                            .getElementById(
+                                "petProgress"
+                            )
+                            .style.display =
+                            "none";
+
+
+                        const poop =
+        document.getElementById("poop");
+
+    poop.classList.add(
+        "poop-show"
+    );
+
+
+                        document
+                            .getElementById(
+                                "poopText"
+                            )
+                            .style.display =
+                            "block";
+
+                    },1200);
+
+                }
+
+            };
+
+    },1800);
+
+}
+
+
+
+
+/* =========================
+   HIỆN LỜI NHẮN 5 GIÂY
+========================= */
+
+function showFinalLines(){
+
+    const lines =
+        document.querySelectorAll(
+            "#finalMessage .final-line"
+        );
+
+    lines.forEach(function(line, index){
+
+        setTimeout(function(){
+
+            line.classList.add("show");
+
+        }, index * 3000);
+
+    });
+
+
+    const totalTime =
+        lines.length * 3000;
+
+
+    setTimeout(function(){
+
+        const btn =
+            document.getElementById(
+                "goPuzzleBtn"
+            );
+
+        if(btn){
+
+            btn.style.display = "flex";
+
+        }
+
+    }, totalTime);
+
+}
+
+
+/* =========================
+   MỞ PUZZLE
+========================= */
+
+function openPuzzle() {
+
+    window.location.href = "puzzle.html";
+
+}
+
+
+
+
+
+/* =========================
+   ENDING CUỐI
+========================= */
+
+function showUltimateEnding(){
+
+    document
+    .getElementById("finalPhoto")
+    .style.display="none";
+
+    document
+    .getElementById("ultimateEnding")
+    .style.display="flex";
+
+}
+
+function handlePoopClick(){
+
+    const poop =
+        document.getElementById("poop");
+
+    const poopText =
+        document.getElementById("poopText");
+
+    const cat =
+        document.getElementById("finalCat");
+
+    const message =
+        document.getElementById("finalMessage");
+
+
+    /* 💩 rung */
+
+    poop.classList.add("poop-clicked");
+
+
+    /* đợi rung xong */
+
+    setTimeout(function(){
+
+        poop.style.display = "none";
+
+        if(poopText){
+            poopText.style.display = "none";
+        }
+
+
+        /* 🐈 mèo biến mất */
+
+        cat.classList.add("cat-fade-out");
+
+
+        setTimeout(function(){
+
+            cat.style.display = "none";
+
+
+            /* 🌷 hiện lời nhắn */
+
+            message.style.display = "block";
+            message.style.opacity = "1";
+            message.style.visibility = "visible";
+
+
+            /* từng câu cách nhau 5 giây */
+
+            showFinalLines();
+
+        },900);
+
+    },700);
+}
+    
+function openPuzzle() {
+
+    window.App.goToPuzzle();
+
+}
+
+</script>
+
+<div id="popup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.35);
+justify-content:center;
+align-items:center;
+z-index:999;
+">
+
+<div class="popup-glass popup-scroll" style="
+padding:40px;
+border-radius:25px;
+text-align:center;
+max-width:500px;
+max-height:80vh;
+overflow-y:auto;
+">
+
+<h2 style="color:#ff5fa2;">
+Yayyyy 💖
+</h2>
+
+<p style="color:white;font-weight:600;">
+📸 Một chiếc meme của tụi mình
+</p>
+
+<img
+src="https://i.pinimg.com/736x/54/6a/28/546a286ba55695e43ff2eb2cbbe3d709.jpg"
+style="
+width:250px;
+border-radius:20px;
+margin:15px 0;
+border:4px solid #ffd6e7;
+box-shadow:0 10px 25px rgba(255,105,180,.25);
+">
+
+<p style="color:white;">
+Mình biết màaaa 🌷
+</p>
+
+<p style="white-space: nowrap;
+font-size:21px;
+font-weight:700;
+color:#fff;
+margin:18px 0;
+text-shadow:
+    0 0 6px rgba(255,255,255,.9),
+    0 0 14px rgba(255,105,180,.9),
+    0 0 25px rgba(255,20,147,.65);
+">Cảm ơn cậu đã đồng ý đi date với mình ✨
+</p>
+
+
+<p class="ready-text">
+☕ Ready for our date? 💕
+</p>
+
+<button
+class="yes"
+style="margin-top:15px;"
+onclick="openSecondPopup()"
+>
+Đi tiếp nè ☕
+</button>
+
+</div>
+
+</div>
+
+<div id="secondPopup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.35);
+justify-content:center;
+align-items:center;
+z-index:1000;
+">
+
+<div class="popup-glass popup-scroll" style="
+padding:30px;
+border-radius:25px;
+width:90%;
+max-width:500px;
+max-height:70vh;
+overflow-y:auto;
+text-align:center;
+padding-right:15px;
+">
+<h2 style="color:#ff5fa2;">
+🌷 Trước khi đi tiếp...
+</h2>
+
+<div style="
+text-align:justify;
+text-justify:inter-word;
+line-height:1.9;
+margin-top:20px;
+color:white;
+">
+
+<div class="message-list">
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Cảm ơn cậu đã dành thời gian xem hết cái web này nha.</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Mình biết nó hơi ngố ngố một chút...</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Nhưng mình thật sự muốn tạo một điều gì đó dễ thương cho cậu ✨</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Hy vọng chúng ta sẽ có một buổi date thật vui, ăn món ngon, nghe nhạc hay và tạo thêm thật nhiều kỷ niệm đẹp 🌷</p>
+    </div>
+
+</div>
+
+<p class="ready-text">
+ ☕💕 Ready chưa nè? ☕💕
+</p>
+
+</div>
+
+<p style="
+margin-top:15px;
+font-style:italic;
+color:rgba(255,255,255,.9);
+text-align:center;
+">
+P/s: Nếu cậu đang cười khi đọc tới đây thì mission accomplished 😌💖
+</p>
+
+<br>
+
+<br>
+
+<button
+id="formBtn"
+class="yes"
+onclick="openFormAndSwap()"
+>
+📋 Điền Form
+</button>
+
+</div>
+
+</div>
+
+<div id="finale">
+
+<div id="curtainLeft"></div>
+<div id="curtainRight"></div>
+
+<!-- MÈO NGỦ FULL MÀN HÌNH -->
+
+<img
+    id="finalCat"
+    src="cat-sleep.gif"
+    alt="cat sleeping"
+>
+
+<!-- BÀN TAY VUỐT MÈO -->
+<button id="petHand" type="button" aria-label="Vuốt mèo">
+    🖐️
+</button>
+
+<div id="petInstruction">
+    Nhấn vào bàn tay để vuốt mình... 🥺
+</div>
+
+    <div id="petProgress">
+        <div id="petProgressBar"></div>
+    </div>
+
+
+<!-- KÍT -->
+
+<button
+    id="poop"
+    type="button"
+    onclick="handlePoopClick()"
+>
+    💩
+</button>
+
+<div id="poopText">
+    Bấm vào đi 👀
+</div>
+
+    <!-- LỜI NHẮN -->
+
+    <div id="finalMessage">
+<div class="indie-header">
+
+    <div class="indie-location">
+        Đà Nẵng · knoccc
+    </div>
+
+    <div class="indie-line"></div>
+
+    <div class="indie-stamp">
+        🌷
+    </div>
+
+</div>
+
+        <div class="final-line final-title">
+    Khoan đi đã...
+</div>
+
+        <div class="final-line final-subtitle">
+    Cậu đã nghe đến đây rồi thì nghe hết bài với mình nhaaa
+    <br>
+    🎧 <i>Bài hát này là phần cuối mình muốn dành cho cậu!!!</i>
+</div>
+
+        <div class="final-line diary-item">
+
+    <div class="diary-number">
+        01
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Mình thật sự rất vui.
+        </div>
+
+        <div class="diary-text">
+            khi cậu
+            dành thời gian xem đến tận đây.
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="final-line diary-item">
+
+    <div class="diary-number">
+        02
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Một chút ngố ngố.
+        </div>
+
+        <div class="diary-text">
+            
+            nhưng từng chút mình làm đều là vì cậu.
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="final-line diary-item">
+
+    <div class="diary-number">
+        03
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Phần còn lại...
+        </div>
+
+        <div class="diary-text">
+            Phần còn lại mình muốn kể cho cậu
+            khi chúng ta gặp nhau.
+        </div>
+
+    </div>
+
+</div>
+<div
+    id="goPuzzleBtn"
+    onclick="openPuzzle()"
+>
+    🎵
+    <span>Nghe tiếp cùng mình</span>
+</div>
+
+
+    <!-- HỘP NHẠC -->
+
+    <div
+        id="musicBox"
+        onclick="openPuzzle()"
+    >
+        🎵
+    </div>
+
+
+    <!-- PUZZLE -->
+
+    <div id="puzzleScreen">
+
+        <div id="puzzleTitle">
+            🧩 Một mảnh cuối cùng...
+        </div>
+
+        <p id="puzzleHint">
+            Ghép ảnh của tụi mình lại nha 💗
+        </p>
+
+        <div id="puzzleBoard"></div>
+
+    </div>
+
+
+    <!-- ẢNH CUỐI -->
+
+    <div id="finalPhoto">
+
+        <p style="
+            color:white;
+            font-size:25px;
+            font-weight:700;
+            margin-bottom:20px;
+        ">
+            📮 Cậu đã hoàn thành rồi.
+            <br>
+            Vậy nên... mình tặng cậu cái này.
+        </p>
+
+        <img src="couple.jpg">
+
+        <div id="finalQuote">
+            “Phần tiếp theo của câu chuyện này
+            <br>
+            mình muốn viết cùng cậu.”
+        </div>
+
+    </div>
+
+
+    <!-- ENDING -->
+
+    <div id="ultimateEnding">
+
+        <h1>
+            🎀 Hết web rồi.
+        </h1>
+
+        <p>
+            Nhưng date thì chưa đâu nha.
+            <br>
+            <b>Hẹn cậu ngoài đời. ❤️</b>
+        </p>
+
+        <p>
+            “Mong lần tới chúng ta không cần đến
+            <br>
+            một cái web để rủ nhau đi date nữa.” 🌷
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
