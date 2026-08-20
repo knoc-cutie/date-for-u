@@ -794,7 +794,9 @@ function puzzleComplete() {
 
     setTimeout(() => {
 
-        window.top.App.goToEnding();
+         window.top.document
+        .getElementById("sceneFrame")
+        .src = "ending.html";
 
     }, 2000);
 
