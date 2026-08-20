@@ -10,6 +10,65 @@
 
 <style>
 
+#nameScreen5{
+    overflow:hidden !important;
+}
+
+#nameScreen5 .system-window{
+    overflow:hidden !important;
+    max-height:none !important;
+}
+
+/* =========================================
+   🚨 RED ALERT FLASH
+========================================= */
+
+#nameGate .alert-screen{
+    animation:
+        screenIn .65s ease,
+        redAlertFlash .65s ease-in-out infinite alternate;
+}
+
+@keyframes redAlertFlash{
+
+    from{
+        background:
+            radial-gradient(
+                circle,
+                rgba(255,40,70,.18),
+                transparent 45%
+            ),
+            #ffdbe5;
+
+        box-shadow:
+            inset 0 0 0 0 rgba(255,0,50,0);
+    }
+
+    to{
+        background:
+            radial-gradient(
+                circle,
+                rgba(255,0,40,.45),
+                transparent 55%
+            ),
+            #ffb8c8;
+
+        box-shadow:
+            inset 0 0 0 18px
+            rgba(255,0,50,.22);
+    }
+
+}
+
+/* FONT CHO SYSTEM INTRO */
+#nameGate,
+#nameGate *{
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
 .final-note{
 
     text-align:center;
@@ -1408,12 +1467,1192 @@ transform:translateY(110vh);
     margin-left:7px;
 }
 
+/* =========================================
+   💗 FULL SCREEN NAME SYSTEM
+========================================= */
+
+#nameGate{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.95),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255,105,180,.20),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ffd5e6,
+            #fff0f7,
+            #ffdbea
+        );
+
+    transition:
+        opacity .7s ease;
+
+}
+
+
+/* =========================================
+   MỖI SCREEN LÀ 1 MÀN RIÊNG
+========================================= */
+
+.name-screen{
+
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    box-sizing:border-box;
+
+    text-align:center;
+
+    animation:
+        screenIn .65s ease;
+
+}
+
+
+.name-screen.active{
+
+    display:flex;
+
+}
+
+/* Không scrollbar cho intro */
+#nameGate,
+#nameGate .name-screen{
+    overflow:hidden !important;
+}
+
+@keyframes screenIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.97)
+            translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   SYSTEM WINDOW
+========================================= */
+
+.system-window{
+
+    width:min(620px,90vw);
+
+    max-height:none;
+
+    overflow:hidden;
+
+    box-sizing:border-box;
+
+    padding:35px 30px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        2px solid
+        rgba(255,255,255,.9);
+
+    box-shadow:
+
+        0 25px 70px
+        rgba(255,80,150,.20),
+
+        inset 0 0 35px
+        rgba(255,255,255,.55);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.system-label{
+
+    display:inline-block;
+
+    margin-bottom:25px;
+
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    background:#ffe1ed;
+
+    color:#ff4f91;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.system-big{
+
+    color:#ff4f91;
+
+    font-size:
+        clamp(28px,5vw,48px);
+
+    font-weight:900;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+
+}
+
+
+.system-sub{
+
+    color:#754c61;
+
+    font-size:17px;
+
+    line-height:1.7;
+
+}
+
+
+/* =========================================
+   LOADING BAR
+========================================= */
+
+.loading-wrap{
+
+    width:min(430px,85%);
+
+    margin:28px auto 10px;
+
+}
+
+
+.loading-track{
+
+    width:100%;
+
+    height:14px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#ffe1ed;
+
+    border:
+        1px solid
+        #ffc2da;
+
+}
+
+
+.loading-fill{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffb4d1,
+            #ff5fa2
+        );
+
+    transition:
+        width .08s linear;
+
+}
+
+
+.loading-percent{
+
+    margin-top:8px;
+
+    color:#ff5fa2;
+
+    font-weight:800;
+
+    text-align:right;
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error-title{
+
+    color:#ff477f;
+
+    font-size:
+        clamp(28px,5vw,46px);
+
+    font-weight:900;
+
+    margin-bottom:22px;
+
+}
+
+
+.error-box{
+
+    display:inline-block;
+
+    padding:12px 18px;
+
+    border-radius:999px;
+
+    background:#ffe1eb;
+
+    color:#e52f69;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================
+   MEME
+========================================= */
+
+.meme-frame{
+
+    width:min(520px,80vw);
+
+    max-height:55vh;
+
+    margin:25px auto;
+
+    padding:12px;
+
+    box-sizing:border-box;
+
+    background:white;
+
+    border:
+        3px solid
+        #ffc1d9;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 18px 45px
+        rgba(255,90,150,.22);
+
+    animation:
+        memeAppear .8s
+        cubic-bezier(.2,.9,.3,1.2);
+
+}
+
+
+.meme-frame img{
+
+    display:block;
+
+    width:100%;
+
+    max-height:50vh;
+
+    object-fit:contain;
+
+    border-radius:17px;
+
+}
+
+
+@keyframes memeAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            scale(.65)
+            rotate(-3deg);
+
+    }
+
+    65%{
+
+        transform:
+            scale(1.04)
+            rotate(1deg);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            rotate(0);
+
+    }
+
+}
+
+
+/* =========================================
+   FORM TÊN
+========================================= */
+
+.registration-title{
+
+    color:#ff5fa2;
+
+    font-size:
+        clamp(25px,4vw,36px);
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+
+.registration-sub{
+
+    color:#754c61;
+
+    line-height:1.7;
+
+    margin-bottom:28px;
+
+}
+
+
+.name-field{
+
+    width:min(420px,90%);
+
+    box-sizing:border-box;
+
+    padding:15px 20px;
+
+    border:
+        2px solid
+        #ffc0d8;
+
+    border-radius:16px;
+
+    outline:none;
+
+    background:
+        rgba(255,255,255,.9);
+
+    color:#754c61;
+
+    font-size:17px;
+
+    text-align:center;
+
+    transition:.25s;
+
+}
+
+
+.name-field:focus{
+
+    border-color:#ff5fa2;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(255,95,162,.10);
+
+}
+
+
+.system-button{
+
+    margin-top:17px;
+
+    padding:14px 25px;
+
+    border:0;
+
+    border-radius:999px;
+
+    background:#ff5fa2;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(255,50,140,.22);
+
+    transition:.25s;
+
+}
+
+
+.system-button:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+}
+
+
+/* =========================================
+   LOADING TEXT
+========================================= */
+
+.loading-lines{
+
+    min-height:150px;
+
+    margin-top:25px;
+
+    color:#754c61;
+
+    line-height:2;
+
+}
+
+
+.loading-line{
+
+    opacity:0;
+
+    animation:
+        lineAppear .5s
+        ease forwards;
+
+}
+
+
+@keyframes lineAppear{
+
+    to{
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================
+   🚨 ALERT
+========================================= */
+
+.alert-screen{
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,75,115,.22),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ffd4df,
+            #fff0f5,
+            #ffd0dc
+        );
+
+}
+
+
+.alert-icon{
+
+    font-size:60px;
+
+    animation:
+        alertPulse .7s
+        infinite alternate;
+
+}
+
+
+@keyframes alertPulse{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.12);
+    }
+
+}
+
+
+.alert-title{
+
+    color:#ef3e70;
+
+    font-size:
+        clamp(32px,6vw,55px);
+
+    font-weight:1000;
+
+}
+
+
+.alert-percent{
+
+    margin:20px 0;
+
+    color:#d9275e;
+
+    font-size:
+        clamp(40px,8vw,75px);
+
+    font-weight:1000;
+
+}
+
+
+/* =========================================
+   CIRCLE LOADING
+========================================= */
+
+.circle-loader{
+
+    width:70px;
+    height:70px;
+
+    margin:30px auto;
+
+    border:
+        7px solid
+        #ffd4e3;
+
+    border-top-color:
+        #ff5fa2;
+
+    border-radius:50%;
+
+    animation:
+        circleSpin 1s
+        linear infinite;
+
+}
+
+
+@keyframes circleSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   FINAL
+========================================= */
+
+.final-cute{
+
+    color:#ff5fa2;
+
+    font-size:
+        clamp(28px,5vw,45px);
+
+    font-weight:900;
+
+}
+
+
+.final-hey{
+
+    margin-top:25px;
+
+    color:#ff5fa2;
+
+    font-size:
+        clamp(35px,7vw,60px);
+
+    font-weight:1000;
+
+    animation:
+        finalPop .8s
+        cubic-bezier(.2,.9,.3,1.2);
+
+}
+
+
+@keyframes finalPop{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.6)
+            translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   RUNG Ô TÊN NẾU ĐỂ TRỐNG
+========================================= */
+
+.shake{
+
+    animation:
+        nameShake .4s ease;
+
+}
+
+
+@keyframes nameShake{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-7px);
+    }
+
+    50%{
+        transform:translateX(7px);
+    }
+
+    75%{
+        transform:translateX(-4px);
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .system-window{
+
+        width:94vw;
+
+        padding:25px 18px;
+
+    }
+
+    .meme-frame{
+
+        width:88vw;
+
+    }
+
+}
+
+/* =========================================
+   💗 MEME FULL SCREEN
+========================================= */
+
+#nameGate .meme-screen{
+    position:absolute;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    padding:0;
+    margin:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:#ffdbea;
+}
+
+#nameGate .meme-screen.active{
+    display:flex;
+}
+
+/* ảnh chiếm toàn màn */
+#nameGate .meme-screen .meme-full{
+    width:100vw;
+    height:100vh;
+
+    object-fit:contain;
+
+    display:block;
+}
+
+/* system nổi trên meme */
+#nameGate .meme-screen .meme-system{
+    position:absolute;
+
+    top:30px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:20;
+
+    padding:12px 24px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.92);
+
+    border:2px solid #ff7eb3;
+
+    color:#ff4f91;
+
+    font-size:16px;
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    box-shadow:
+        0 10px 35px rgba(255,50,140,.28);
+
+    backdrop-filter:blur(10px);
+
+    white-space:nowrap;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="card" id="welcome">
+<!-- =========================================
+     💗 FULL SCREEN NAME SYSTEM
+========================================= -->
+
+<div id="nameGate">
+
+
+    <!-- ================================
+         MÀN 1 — KHỞI ĐỘNG
+    ================================= -->
+
+    <section
+        class="name-screen active"
+        id="nameScreen1"
+    >
+
+        <div class="system-window">
+
+            <div class="system-label">
+                💗 DATE-FOR-U SYSTEM
+            </div>
+
+            <div class="system-big">
+                Đang khởi động...
+            </div>
+
+            <div class="system-sub">
+                Xin vui lòng ngồi yên một chút
+                <br>
+                Hệ thống đang làm việc rất nghiêm túc 💢
+            </div>
+
+            <div class="loading-wrap">
+
+                <div class="loading-track">
+
+                    <div
+                        id="bootFill"
+                        class="loading-fill"
+                    ></div>
+
+                </div>
+
+                <div
+                    id="bootPercent"
+                    class="loading-percent"
+                >
+                    0%
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- ================================
+     MÀN 2 — MEME 1
+================================= -->
+
+<section
+    class="name-screen meme-screen"
+    id="nameScreen2"
+>
+
+    <div class="meme-system">
+        💗 DATE-FOR-U SYSTEM — KHÔNG XÁC ĐỊNH ĐƯỢC
+    </div>
+
+    <img
+        class="meme-full"
+        src="meme1.jpg"
+        alt="meme 1"
+    >
+
+</section>
+    
+
+<!-- ================================
+     MÀN 3 — NHẬP TÊN
+================================= -->
+
+<section
+    class="name-screen"
+    id="nameScreen3"
+>
+
+    <div class="system-window">
+
+        <div class="system-label">
+            📋 HỒ SƠ NGƯỜI CHƠI
+        </div>
+
+        <div class="registration-title">
+            Vui lòng khai báo danh tính
+        </div>
+
+        <div class="registration-sub">
+
+            Trước khi tiếp tục
+
+            <br>
+
+            hệ thống cần biết
+            <b>nên gọi bạn là gì</b>
+
+            <br><br>
+
+            *(đây là thủ tục rất quan trọng)* 😌
+
+        </div>
+
+        <input
+            id="playerNameInput"
+            class="name-field"
+            type="text"
+            maxlength="30"
+            autocomplete="off"
+            placeholder="Tên của bạn là...?"
+        >
+
+        <br>
+
+        <button
+            class="system-button"
+            onclick="confirmPlayerName()"
+        >
+            Xác nhận danh tính 🔍
+        </button>
+
+    </div>
+
+</section>
+   
+
+    <!-- ================================
+         MÀN 4 — LOADING KIỂM TRA
+    ================================= -->
+
+    <section
+        class="name-screen"
+        id="nameScreen4"
+    >
+
+        <div class="system-window">
+
+            <div class="system-label">
+                🔄 ĐANG XỬ LÝ
+            </div>
+
+            <div class="system-big">
+                Đang kiểm tra...
+            </div>
+
+            <div
+                id="loadingLines"
+                class="loading-lines"
+            ></div>
+
+            <div class="loading-wrap">
+
+                <div class="loading-track">
+
+                    <div
+                        id="checkFill"
+                        class="loading-fill"
+                    ></div>
+
+                </div>
+
+                <div
+                    id="checkPercent"
+                    class="loading-percent"
+                >
+                    0%
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         MÀN 5 — CẢNH BÁO
+    ================================= -->
+
+    <section
+        class="name-screen alert-screen"
+        id="nameScreen5"
+    >
+
+        <div class="system-window">
+
+            <div class="alert-icon">
+                🚨
+            </div>
+
+            <div class="system-label">
+                ⚠️ SYSTEM ALERT
+            </div>
+
+            <div class="alert-title">
+                CẢNH BÁO
+            </div>
+
+            <div class="system-sub">
+
+                Hệ thống phát hiện
+                <br>
+                một mức độ đáng ngờ bất thường.
+
+            </div>
+
+            <div class="alert-percent">
+
+                <span id="alertPercent">
+                    0
+                </span>%
+
+            </div>
+
+            <div class="system-sub">
+                ĐỘ ĐÁNG NGỜ
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- ================================
+     MÀN 6 — MEME 2
+================================= -->
+
+<section
+    class="name-screen meme-screen"
+    id="nameScreen6"
+>
+
+    <div class="meme-system">
+        🔎 DATE-FOR-U SYSTEM — ĐÃ TÌM THẤY
+    </div>
+
+    <img
+        class="meme-full"
+        src="meme2.jpg"
+        alt="meme 2"
+    >
+
+</section>    
+
+
+    <!-- ================================
+         MÀN 7 — LOADING VÒNG TRÒN
+    ================================= -->
+
+    <section
+        class="name-screen"
+        id="nameScreen7"
+    >
+
+        <div class="system-window">
+
+            <div class="system-label">
+                🧠 PHÂN TÍCH CUỐI CÙNG
+            </div>
+
+            <div class="system-big">
+                Hmm...
+            </div>
+
+            <div class="circle-loader"></div>
+
+            <div
+                id="cuteLoadingText"
+                class="system-sub"
+            >
+                Đang suy nghĩ...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+     MÀN 8 — MEME 3
+================================= -->
+
+<section
+    class="name-screen meme-screen"
+    id="nameScreen8"
+>
+
+    <div class="meme-system">
+        💗 DATE-FOR-U SYSTEM — PHÂN TÍCH HOÀN TẤT
+    </div>
+
+    <img
+        class="meme-full"
+        src="meme3.jpg"
+        alt="meme 3"
+    >
+
+</section>
+
+
+    <!-- ================================
+     MÀN 9 — HOÀN TẤT
+================================= -->
+
+<section
+    class="name-screen"
+    id="nameScreen9"
+>
+
+    <div class="system-window">
+
+        <div class="system-label">
+            🎀 SYSTEM COMPLETE
+        </div>
+
+        <div class="final-hey">
+            Hey
+            <span id="finalPlayerName">
+                Mquan
+            </span>!
+            🎀
+        </div>
+
+        <button
+            class="system-button"
+            onclick="finishNameSystem()"
+        >
+            OK 💗
+        </button>
+
+    </div>
+
+</section>
+
+
+</div>
+
+<div
+    class="card"
+    id="welcome"
+    style="display:none;"
+>
 
 <h1>💌 Thư mời đặc biệt 💌</h1>
 <div id="typing"></div>
@@ -1470,35 +2709,511 @@ onclick="startFinale()"
 
 <script>
 
+let playerName = "";
+
 const lines = [
 
-"Hey Mquan 🌷",
+    "PLACEHOLDER_NAME",
 
-"Mình đã suy nghĩ khá lâu trước khi làm cái này đó!!!",
+    "Mình đã suy nghĩ khá lâu trước khi làm cái này đó!!!",
 
-"Thật ra mình có một câu hỏi nho nhỏ muốn hỏi cậu...",
+    "Thật ra mình có một câu hỏi nho nhỏ muốn hỏi cậu...",
 
-"Đừng lo, không phải về bài tập đâu???",
+    "Đừng lo, không phải về bài tập đâu???",
 
-"Cũng không phải về công việc hay những chuyện đau đầu khác~~~",
+    "Cũng không phải về công việc hay những chuyện đau đầu khác~~~",
 
-"Lại càng không phải mấy câu hỏi triết lý về tương lai nữaaaa",
+    "Lại càng không phải mấy câu hỏi triết lý về tương lai nữaaaa",
 
-"Chỉ là...",
+    "Chỉ là...",
 
-"Mình đang muốn dành thêm thời gian với cậu một chút...",
+    "Mình đang muốn dành thêm thời gian với cậu một chút...",
 
-"Muốn cùng cậu đi đâu đó, ăn gì đó ngon ngon, nghe vài bài nhạc hay hay và tạo thêm một kỷ niệm mớiiii",
+    "Muốn cùng cậu đi đâu đó, ăn gì đó ngon ngon, nghe vài bài nhạc hay hay và tạo thêm một kỷ niệm mớiiii",
 
-"Vậy nên...",
-
-
+    "Vậy nên...",
 
 ];
-
 let i = 0;
 
 let fastMode = false;
+
+/* =========================================
+   💗 FULL SCREEN NAME SYSTEM
+========================================= */
+
+let nameSystemRunning = false;
+
+
+/* =========================================
+   CHUYỂN MÀN
+========================================= */
+
+function goNameScreen(number){
+
+    document
+        .querySelectorAll(".name-screen")
+        .forEach(screen => {
+
+            screen.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const next =
+        document.getElementById(
+            "nameScreen" + number
+        );
+
+
+    if(next){
+
+        next.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   DELAY
+========================================= */
+
+function wait(ms){
+
+    return new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                ms
+            )
+    );
+
+}
+
+
+/* =========================================
+   MÀN 1
+========================================= */
+
+async function startNameSystem(){
+
+    if(nameSystemRunning){
+        return;
+    }
+
+    nameSystemRunning = true;
+
+
+    goNameScreen(1);
+
+
+    const fill =
+        document.getElementById(
+            "bootFill"
+        );
+
+    const percent =
+        document.getElementById(
+            "bootPercent"
+        );
+
+
+    const steps = [
+
+        10,
+
+        30,
+
+        55,
+
+        75,
+
+        100
+
+    ];
+
+
+    for(
+        const value of steps
+    ){
+
+        fill.style.width =
+            value + "%";
+
+        percent.innerText =
+            value + "%";
+
+
+        await wait(900);
+
+    }
+
+
+    await wait(1000);
+
+
+    /* MÀN 2 */
+
+    goNameScreen(2);
+
+
+    await wait(3200);
+
+
+    /* MÀN 3 */
+
+    goNameScreen(3);
+
+
+    await wait(500);
+
+
+    document
+        .getElementById(
+            "playerNameInput"
+        )
+        .focus();
+
+}
+
+
+/* =========================================
+   MÀN 3 → MÀN 4
+========================================= */
+
+async function confirmPlayerName(){
+
+    const input =
+        document.getElementById(
+            "playerNameInput"
+        );
+
+
+    const name =
+        input.value.trim();
+
+
+    /* CHƯA NHẬP TÊN */
+
+    if(!name){
+
+        input.placeholder =
+            "Khai báo tên đi mà 😭";
+
+
+        input.classList.add(
+            "shake"
+        );
+
+
+        setTimeout(() => {
+
+            input.classList.remove(
+                "shake"
+            );
+
+        },400);
+
+
+        return;
+
+    }
+
+
+    /* LƯU TÊN */
+
+    playerName =
+        name;
+
+
+    localStorage.setItem(
+        "dateForUPlayerName",
+        playerName
+    );
+
+
+    document
+        .getElementById(
+            "finalPlayerName"
+        )
+        .innerText =
+            playerName;
+
+
+    /* =====================================
+       MÀN 4
+    ===================================== */
+
+    goNameScreen(4);
+
+
+    await runCheckLoading();
+
+
+    /* =====================================
+       MÀN 5
+    ===================================== */
+
+    await runSuspicion();
+
+
+    /* =====================================
+       MÀN 6
+    ===================================== */
+
+    goNameScreen(6);
+
+
+    await wait(3200);
+
+
+    /* =====================================
+       MÀN 7
+    ===================================== */
+
+    goNameScreen(7);
+
+
+    await runCuteAnalysis();
+
+
+    /* =====================================
+       MÀN 8
+    ===================================== */
+
+    goNameScreen(8);
+
+
+    await wait(3500);
+
+
+    /* =====================================
+       MÀN 9
+    ===================================== */
+
+    goNameScreen(9);
+
+}
+
+
+
+
+/* =========================================
+   MÀN 4 — LOADING
+========================================= */
+
+async function runCheckLoading(){
+
+    const fill =
+        document.getElementById("checkFill");
+
+    const percent =
+        document.getElementById("checkPercent");
+
+    const lines =
+        document.getElementById("loadingLines");
+
+
+    const messages = [
+
+        "Đang kiểm tra dữ liệu",
+
+        "Đang đối chiếu thông tin",
+
+        "Đang xác định mức độ nguy hiểm",
+
+        "Đang suy nghĩ",
+
+        "Hmmmmm",
+
+        "Có gì đó không ổn lắm"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < messages.length;
+        i++
+    ){
+
+        /* CHỈ THAY CÂU HIỆN TẠI */
+        lines.innerText =
+            messages[i];
+
+
+        const progress =
+            Math.round(
+                ((i + 1)
+                / messages.length)
+                * 100
+            );
+
+
+        fill.style.width =
+            progress + "%";
+
+
+        percent.innerText =
+            progress + "%";
+
+
+        await wait(1000);
+
+    }
+
+
+    await wait(500);
+
+}
+
+
+/* =========================================
+   MÀN 5 — ĐỘ ĐÁNG NGỜ
+========================================= */
+
+async function runSuspicion(){
+
+    goNameScreen(5);
+
+
+    const number =
+        document.getElementById(
+            "alertPercent"
+        );
+
+
+    for(
+        let i = 0;
+        i <= 100;
+        i++
+    ){
+
+        number.innerText =
+            i;
+
+
+        await wait(35);
+
+    }
+
+
+    await wait(2200);
+
+}
+
+
+/* =========================================
+   MÀN 7 — PHÂN TÍCH CUỐI
+========================================= */
+
+async function runCuteAnalysis(){
+
+    const text =
+        document.getElementById(
+            "cuteLoadingText"
+        );
+
+
+    const messages = [
+
+        "Đang suy nghĩ...",
+
+        "Hmm...",
+
+        "Đang cân nhắc...",
+
+        "Kiểm tra lại lần cuối...",
+
+        "Có vẻ ổn...",
+
+        "Khoan!!!",
+
+        "Cũng dễ thươngggggg"
+
+    ];
+
+
+    for(
+    const message of messages
+){
+
+    text.innerText =
+        message;
+
+    await wait(900);
+
+}
+
+await wait(500);
+
+}
+
+
+/* =========================================
+   MÀN 9 → INTRO CŨ
+========================================= */
+
+function finishNameSystem(){
+
+    const gate =
+        document.getElementById(
+            "nameGate"
+        );
+
+
+    gate.style.opacity =
+        "0";
+
+
+    setTimeout(() => {
+
+        gate.style.display =
+            "none";
+
+
+        /* MỞ INTRO CŨ */
+
+        document
+            .getElementById(
+                "welcome"
+            )
+            .style.display =
+                "block";
+
+
+        /* THAY TÊN */
+
+        lines[0] =
+            "Hey " +
+            playerName +
+            " 🌷";
+
+
+        i = 0;
+
+        fastMode = false;
+
+
+        document
+            .getElementById(
+                "typing"
+            )
+            .innerHTML =
+                "";
+
+
+        showNextLine();
+
+
+    },700);
+
+}
 
 function showNextLine(){
 
@@ -1538,7 +3253,7 @@ document
 }
 }
 
-showNextLine();
+startNameSystem();
 
 document.addEventListener("click", (event) => {
 
@@ -2467,6 +4182,12 @@ onclick="openFormAndSwap()"
     </div>
 
 </div>
+
+<script
+    async
+    defer
+    src="https://assets.pinterest.com/js/pinit.js"
+></script>
 
 </body>
 </html>
