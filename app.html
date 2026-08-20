@@ -59,180 +59,28 @@ body{
      NƠI CHỨA 3 WEB
 ===================================================== -->
 
-<div id="app"></div>
+<div id="app">
+    <iframe
+        id="sceneFrame"
+        src="index.html"
+        allow="autoplay"
+    ></iframe>
+</div>
 
 <script>
 
-const music = document.getElementById("bgMusic");
+const music =
+    document.getElementById("bgMusic");
 
 music.volume = 0.35;
 
 
 /* =====================================================
-   LOAD SCENE
+   IFRAME CHÍNH
 ===================================================== */
 
-async function loadScene(file) {
-
-    const app =
-        document.getElementById("app");
-
-
-    /* =========================
-       XÓA SCENE CŨ
-    ========================= */
-
-    app.innerHTML = "";
-
-
-    /* =========================
-       ĐỌC FILE HTML
-    ========================= */
-
-    const response =
-        await fetch(file);
-
-    if (!response.ok) {
-
-        throw new Error(
-            "Không thể load " + file
-        );
-
-    }
-
-
-    const html =
-        await response.text();
-
-
-    /* =========================
-       PARSE HTML
-    ========================= */
-
-    const parser =
-        new DOMParser();
-
-    const doc =
-        parser.parseFromString(
-            html,
-            "text/html"
-        );
-
-
-    /* =========================
-       COPY CSS
-    ========================= */
-
-    const styles =
-        [
-            ...doc.querySelectorAll("style")
-        ];
-
-    styles.forEach(style => {
-
-        const newStyle =
-            document.createElement("style");
-
-        newStyle.textContent =
-            style.textContent;
-
-        app.appendChild(
-            newStyle
-        );
-
-    });
-
-
-    /* =========================
-       COPY BODY
-    ========================= */
-
-    const body =
-        doc.body;
-
-
-    /* =========================
-       BỎ AUDIO CỦA SCENE
-    ========================= */
-
-    const oldMusic =
-        body.querySelector(
-            "#bgMusic"
-        );
-
-    if (oldMusic) {
-
-        oldMusic.remove();
-
-    }
-
-
-    /* =========================
-       ĐƯA HTML VÀO APP
-    ========================= */
-
-    const content =
-        document.createElement("div");
-
-    content.innerHTML =
-        body.innerHTML;
-
-    app.appendChild(
-        content
-    );
-
-
-    /* =========================
-       CHẠY SCRIPT CỦA SCENE
-    ========================= */
-
-    const scripts =
-        [
-            ...body.querySelectorAll("script")
-        ];
-
-
-    for (
-        const oldScript of scripts
-    ) {
-
-        const newScript =
-            document.createElement(
-                "script"
-            );
-
-
-        /* SCRIPT INLINE */
-
-        if (
-            oldScript.textContent
-        ) {
-
-            newScript.textContent =
-                oldScript.textContent;
-
-        }
-
-
-        /* SCRIPT CÓ SRC */
-
-        if (
-            oldScript.src
-        ) {
-
-            newScript.src =
-                oldScript.src;
-
-        }
-
-
-        app.appendChild(
-            newScript
-        );
-
-    }
-
-}
+const sceneFrame =
+    document.getElementById("sceneFrame");
 
 
 /* =====================================================
@@ -241,44 +89,32 @@ async function loadScene(file) {
 
 window.App = {
 
-
     goToIndex() {
 
-        loadScene(
-            "index.html"
-        );
+        sceneFrame.src =
+            "index.html";
 
     },
 
 
     goToPuzzle() {
 
-        loadScene(
-            "puzzle.html"
-        );
+        sceneFrame.src =
+            "puzzle.html";
 
     },
 
 
     goToEnding() {
 
-        loadScene(
-            "ending.html"
-        );
+        sceneFrame.src =
+            "ending.html";
 
     }
 
 };
 
-
-/* =====================================================
-   BẮT ĐẦU WEB
-===================================================== */
-
-loadScene(
-    "index.html"
-);
-
 </script>
+    
 </body>
 </html>
