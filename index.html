@@ -2085,7 +2085,9 @@ function handlePoopClick(){
     
 function openPuzzle() {
 
-    window.top.App.goToPuzzle();
+    window.top.document
+        .getElementById("sceneFrame")
+        .src = "puzzle.html";
 
 }
 
