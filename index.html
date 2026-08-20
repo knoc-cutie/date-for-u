@@ -1651,12 +1651,22 @@ document
 
 function closeSecondPopup(){
 
-document
-.getElementById("secondPopup")
-.style.display="none";
+    document
+    .getElementById("secondPopup")
+    .style.display="none";
+
+
+    /*
+       Đã bấm "Quay lại"
+       → giữ Google Form
+       → hiện nút "Mình điền xong rồi"
+    */
+
+    document
+    .getElementById("formDoneBtn")
+    .style.display="block";
 
 }
-
 function openForm(){
 
 document
