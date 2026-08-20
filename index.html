@@ -2308,57 +2308,71 @@ transform:translateY(110vh);
 }
 
 /* =========================================
-   🔎 CHECK LOADING — GIF
+   🔎 CHECK LOADING
 ========================================= */
+
+#nameScreen4{
+    position:relative;
+    overflow:hidden !important;
+
+    background-image:url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3FxaHl1eWR4Y3ZiMmE1M3cyenYwMGRrNzZkOGo0dDc3N3hpeDMwbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cL9tSf5OaOaCk/giphy.gif");
+
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:420px auto;
+}
+
 
 .check-loading{
     width:min(480px,80vw);
-    margin:25px auto 0;
+
+    margin:35px auto 0;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
 }
 
-.check-gif{
-    width:110px;
-    height:110px;
-
-    object-fit:contain;
-
-    display:block;
-
-    margin-bottom:10px;
-}
 
 .check-loading .loading-bar{
     width:100%;
 }
 
+
 .check-loading .loading-percent{
     margin-top:8px;
 }
+
 
 #nameScreen4{
     overflow:hidden !important;
 }
 
-#nameScreen4 .system-window{
-    overflow:hidden !important;
-}    
-
 /* =========================================
-   💗 FIRST LOADING — SEARCH ICON
+   💗 FIRST LOADING — 🔍 CHẠY THEO THANH
 ========================================= */
 
 .first-loading{
     width:min(480px,80vw);
-    margin:25px auto 0;
+    margin:30px auto 0;
 }
 
 .first-loading-track{
     position:relative;
     width:100%;
+    padding-top:18px;
+}
+
+.first-loading .loading-bar{
+    position:relative;
+    width:100%;
+    height:14px;
+    overflow:visible;
+    border-radius:999px;
+    background:#ffe1ed;
+    border:1px solid #ffc2da;
 }
 
 .search-icon{
@@ -2367,17 +2381,45 @@ transform:translateY(110vh);
     left:0;
     top:50%;
 
-    transform:
-        translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
     z-index:10;
 
-    font-size:28px;
-
-    transition:left .15s linear;
+    font-size:27px;
 
     pointer-events:none;
-}    
+
+    transition:left .08s linear;
+
+    filter:
+        drop-shadow(0 3px 5px rgba(255,95,162,.25));
+}
+
+.check-loading .loading-bar{
+    position:relative;
+    width:100%;
+    height:14px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#ffe1ed;
+    border:1px solid #ffc2da;
+}
+
+.check-loading .loading-fill{
+    width:0%;
+    height:100%;
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffb4d1,
+            #ff5fa2
+        );
+
+    transition:
+        width .08s linear;
+}
     
 </style>
 </head>
@@ -2416,49 +2458,38 @@ transform:translateY(110vh);
                 Hệ thống đang làm việc rất nghiêm túc 💢
             </div>
 
-            <div class="loading-wrap">
+           <div class="loading-wrap">
 
-                <div class="first-loading">
+    <div class="first-loading">
 
-    <div class="first-loading-track">
+        <div class="first-loading-track">
 
-        <span
-            class="search-icon"
-            id="searchIcon"
+            <span
+                class="search-icon"
+                id="searchIcon"
+            >
+                🔍
+            </span>
+
+            <div class="loading-bar">
+                <div
+                    class="loading-fill"
+                    id="introFill"
+                ></div>
+            </div>
+
+        </div>
+
+        <div
+            id="bootPercent"
+            class="loading-percent"
         >
-            🔍
-        </span>
-
-        <div class="loading-bar">
-            <div
-                class="loading-fill"
-                id="introFill"
-            ></div>
+            0%
         </div>
 
     </div>
 
 </div>
-
-                <div
-                    id="bootPercent"
-                    class="loading-percent"
-                >
-                    0%
-                    const searchIcon =
-    document.getElementById("searchIcon");
-
-if(searchIcon){
-
-    searchIcon.style.left =
-        progress + "%";
-
-}
-                </div>
-
-            </div>
-
-        </div>
 
     </section>
 
@@ -2566,42 +2597,30 @@ if(searchIcon){
                 class="loading-lines"
             ></div>
 
-            <div class="loading-wrap">
+       <div class="loading-wrap">
 
-                <div class="check-loading">
+    <div class="check-loading">
 
-    <img
-        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3FxaHl1eWR4Y3ZiMmE1M3cyenYwMGRrNzZkOGo0dDc3N3hpeDMwbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cL9tSf5OaOaCk/giphy.gif"
-        class="check-gif"
-        alt=""
-    >
 
-    <div class="loading-bar">
+        <div class="loading-bar">
+
+            <div
+                class="loading-fill"
+                id="checkFill"
+            ></div>
+
+        </div>
+
         <div
-            class="loading-fill"
-            id="checkFill"
-        ></div>
-    </div>
+            id="checkPercent"
+            class="loading-percent"
+        >
+            0%
+        </div>
 
-    <div
-        class="loading-percent"
-        id="checkPercent"
-    >
-        0%
     </div>
 
 </div>
-
-                <div
-                    id="checkPercent"
-                    class="loading-percent"
-                >
-                    0%
-                </div>
-
-            </div>
-
-        </div>
 
     </section>
 
@@ -2932,10 +2951,15 @@ async function startNameSystem(){
     goNameScreen(1);
 
 
-    const fill =
-        document.getElementById(
-            "bootFill"
-        );
+   const fill =
+    document.getElementById(
+        "introFill"
+    );
+
+const searchIcon =
+    document.getElementById(
+        "searchIcon"
+    );
 
     const percent =
         document.getElementById(
@@ -2959,19 +2983,25 @@ async function startNameSystem(){
 
 
     for(
-        const value of steps
-    ){
+    const value of steps
+){
 
-        fill.style.width =
+    fill.style.width =
+        value + "%";
+
+    percent.innerText =
+        value + "%";
+
+    if(searchIcon){
+
+        searchIcon.style.left =
             value + "%";
-
-        percent.innerText =
-            value + "%";
-
-
-        await wait(900);
 
     }
+
+    await wait(900);
+
+}
 
 
     await wait(1000);
