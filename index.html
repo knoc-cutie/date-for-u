@@ -2307,6 +2307,78 @@ transform:translateY(110vh);
     white-space:nowrap;
 }
 
+/* =========================================
+   🔎 CHECK LOADING — GIF
+========================================= */
+
+.check-loading{
+    width:min(480px,80vw);
+    margin:25px auto 0;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.check-gif{
+    width:110px;
+    height:110px;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin-bottom:10px;
+}
+
+.check-loading .loading-bar{
+    width:100%;
+}
+
+.check-loading .loading-percent{
+    margin-top:8px;
+}
+
+#nameScreen4{
+    overflow:hidden !important;
+}
+
+#nameScreen4 .system-window{
+    overflow:hidden !important;
+}    
+
+/* =========================================
+   💗 FIRST LOADING — SEARCH ICON
+========================================= */
+
+.first-loading{
+    width:min(480px,80vw);
+    margin:25px auto 0;
+}
+
+.first-loading-track{
+    position:relative;
+    width:100%;
+}
+
+.search-icon{
+    position:absolute;
+
+    left:0;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:10;
+
+    font-size:28px;
+
+    transition:left .15s linear;
+
+    pointer-events:none;
+}    
+    
 </style>
 </head>
 
@@ -2346,20 +2418,42 @@ transform:translateY(110vh);
 
             <div class="loading-wrap">
 
-                <div class="loading-track">
+                <div class="first-loading">
 
-                    <div
-                        id="bootFill"
-                        class="loading-fill"
-                    ></div>
+    <div class="first-loading-track">
 
-                </div>
+        <span
+            class="search-icon"
+            id="searchIcon"
+        >
+            🔍
+        </span>
+
+        <div class="loading-bar">
+            <div
+                class="loading-fill"
+                id="introFill"
+            ></div>
+        </div>
+
+    </div>
+
+</div>
 
                 <div
                     id="bootPercent"
                     class="loading-percent"
                 >
                     0%
+                    const searchIcon =
+    document.getElementById("searchIcon");
+
+if(searchIcon){
+
+    searchIcon.style.left =
+        progress + "%";
+
+}
                 </div>
 
             </div>
@@ -2474,14 +2568,29 @@ transform:translateY(110vh);
 
             <div class="loading-wrap">
 
-                <div class="loading-track">
+                <div class="check-loading">
 
-                    <div
-                        id="checkFill"
-                        class="loading-fill"
-                    ></div>
+    <img
+        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3FxaHl1eWR4Y3ZiMmE1M3cyenYwMGRrNzZkOGo0dDc3N3hpeDMwbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cL9tSf5OaOaCk/giphy.gif"
+        class="check-gif"
+        alt=""
+    >
 
-                </div>
+    <div class="loading-bar">
+        <div
+            class="loading-fill"
+            id="checkFill"
+        ></div>
+    </div>
+
+    <div
+        class="loading-percent"
+        id="checkPercent"
+    >
+        0%
+    </div>
+
+</div>
 
                 <div
                     id="checkPercent"
