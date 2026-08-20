@@ -2253,13 +2253,24 @@ transform:translateY(110vh);
 }
 
 /* ảnh chiếm toàn màn */
-#nameGate .meme-screen .meme-full{
+#nameGate .meme-screen{
+    position:absolute;
+    inset:0;
+
     width:100vw;
     height:100vh;
 
-    object-fit:contain;
+    padding:0;
+    margin:0;
 
-    display:block;
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:#ffdbea;
 }
 
 /* system nổi trên meme */
