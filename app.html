@@ -61,15 +61,9 @@ body{
 
 <div id="app"></div>
 
-
 <script>
 
-/* =====================================================
-   MUSIC ENGINE
-===================================================== */
-
-const music =
-    document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic");
 
 music.volume = 0.35;
 
@@ -78,36 +72,43 @@ music.volume = 0.35;
    LOAD SCENE
 ===================================================== */
 
-async function loadScene(file){
+async function loadScene(file) {
 
     const app =
         document.getElementById("app");
 
-    /*
-       Xóa scene cũ
-    */
+
+    /* =========================
+       XÓA SCENE CŨ
+    ========================= */
+
     app.innerHTML = "";
 
 
-    /*
-       Đọc file HTML
-    */
+    /* =========================
+       ĐỌC FILE HTML
+    ========================= */
+
     const response =
         await fetch(file);
 
-    if(!response.ok){
+    if (!response.ok) {
+
         throw new Error(
             "Không thể load " + file
         );
+
     }
+
 
     const html =
         await response.text();
 
 
-    /*
-       Parse HTML
-    */
+    /* =========================
+       PARSE HTML
+    ========================= */
+
     const parser =
         new DOMParser();
 
@@ -118,12 +119,14 @@ async function loadScene(file){
         );
 
 
-    /*
-       Lấy CSS trong file
-    */
+    /* =========================
+       COPY CSS
+    ========================= */
 
     const styles =
-        [...doc.querySelectorAll("style")];
+        [
+            ...doc.querySelectorAll("style")
+        ];
 
     styles.forEach(style => {
 
@@ -140,29 +143,33 @@ async function loadScene(file){
     });
 
 
-    /*
-       Lấy nội dung BODY
-    */
+    /* =========================
+       COPY BODY
+    ========================= */
 
     const body =
         doc.body;
 
-    /*
-       Bỏ audio cũ của index
-       vì app.html đã có audio duy nhất
-    */
+
+    /* =========================
+       BỎ AUDIO CỦA SCENE
+    ========================= */
 
     const oldMusic =
-        body.querySelector("#bgMusic");
+        body.querySelector(
+            "#bgMusic"
+        );
 
-    if(oldMusic){
+    if (oldMusic) {
+
         oldMusic.remove();
+
     }
 
 
-    /*
-       Đưa HTML vào app
-    */
+    /* =========================
+       ĐƯA HTML VÀO APP
+    ========================= */
 
     const content =
         document.createElement("div");
@@ -175,40 +182,49 @@ async function loadScene(file){
     );
 
 
-    /*
-       Chạy lại toàn bộ script
-       của file được load
-    */
+    /* =========================
+       CHẠY SCRIPT CỦA SCENE
+    ========================= */
 
     const scripts =
-        [...body.querySelectorAll("script")];
+        [
+            ...body.querySelectorAll("script")
+        ];
 
-    for(const oldScript of scripts){
+
+    for (
+        const oldScript of scripts
+    ) {
 
         const newScript =
-            document.createElement("script");
+            document.createElement(
+                "script"
+            );
 
-        /*
-           Script inline
-        */
 
-        if(oldScript.textContent){
+        /* SCRIPT INLINE */
+
+        if (
+            oldScript.textContent
+        ) {
 
             newScript.textContent =
                 oldScript.textContent;
 
         }
 
-        /*
-           Script có src
-        */
 
-        if(oldScript.src){
+        /* SCRIPT CÓ SRC */
+
+        if (
+            oldScript.src
+        ) {
 
             newScript.src =
                 oldScript.src;
 
         }
+
 
         app.appendChild(
             newScript
@@ -220,12 +236,13 @@ async function loadScene(file){
 
 
 /* =====================================================
-   CHUYỂN SCENE
+   CHUYỂN MÀN
 ===================================================== */
 
 window.App = {
 
-    goToIndex(){
+
+    goToIndex() {
 
         loadScene(
             "index.html"
@@ -233,7 +250,8 @@ window.App = {
 
     },
 
-    goToPuzzle(){
+
+    goToPuzzle() {
 
         loadScene(
             "puzzle.html"
@@ -241,7 +259,8 @@ window.App = {
 
     },
 
-    goToEnding(){
+
+    goToEnding() {
 
         loadScene(
             "ending.html"
@@ -253,7 +272,7 @@ window.App = {
 
 
 /* =====================================================
-   KHỞI ĐỘNG
+   BẮT ĐẦU WEB
 ===================================================== */
 
 loadScene(
@@ -261,6 +280,5 @@ loadScene(
 );
 
 </script>
-
 </body>
 </html>
